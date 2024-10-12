@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}Your Cart{% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4">Your Cart</h1>
+<div id="cart-content" class="container">
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-dark">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th>Payment</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr class="text-center align-middle">
+                    <td data-label="Image"><img src="{{item.product.image.url }}" alt="" class="img-fluid cart-image"></td>
+                    <td data-label="Product">{{ item.product.name }}</td>
+                    <td data-label="Quantity">{{ item.quantity }}</td>
+                    <td data-label="Price">${{ item.product.price }}</td>
+                    <td data-label="Total">${{ item.get_total_price }}</td>
+                    <td data-label="Payment"><a href="https://docs.google.com/forms/d/1wH9vsUmT5Qy3AdjSqLviMkPzcT1dvs9EDRPKyi_su98/edit" class="btn btn-success btn-sm">Payment</a></td>
+                    <td data-label="Remove"><a href="{% url 'remove_from_cart' item.product.id %}" class="btn btn-danger btn-sm">Remove</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h3>Total: ${{ total }}</h3>
+        </div>
+        <div class="col-md-6 text-md-end">
+            <a href="" class="btn btn-success">Continue Shopping</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .cart-image {
+        max-width: 100px;
+        max-height: 100px;
+    }
+
+    @media screen and (max-width: 767px) {
+        .table-responsive table,
+        .table-responsive thead,
+        .table-responsive tbody,
+        .table-responsive th,
+        .table-responsive td,
+        .table-responsive tr {
+            display: block;
+        }
+
+        .table-responsive thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        .table-responsive tr {
+            border: 1px solid #ccc;
+            margin-bottom: 1rem;
+        }
+
+        .table-responsive td {
+            border: none;
+            position: relative;
+            padding-left: 50%;
+            text-align: right;
+        }
+
+        .table-responsive td:before {
+            content: attr(data-label);
+            position: absolute;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .cart-image {
+            max-width: 50px;
+            max-height: 50px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+        }
+    }
+</style>
+{% endblock %}

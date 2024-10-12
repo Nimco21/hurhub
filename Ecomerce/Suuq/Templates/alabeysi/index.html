@@ -1,0 +1,126 @@
+{% extends 'Base.html' %}
+{% block content %}
+
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+       {%for promotion in promotions%}
+      <div class="carousel-item {%if forloop.first%} active{%endif%}">
+        
+
+        <img src="{{promotion.image.url}}" class="d-block w-100" alt="...">
+      </div>
+      {%endfor%}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+    <style>
+        .carousel-item {width: 60%; height: 500px;  background-color: #000; border-radius:red 10px; }
+        .carousel-item img {width: 100%; height: 500px; object-fit: cover; border-radius:red 10px; }
+
+    </style>
+
+  </div>    
+
+  <h1 class="mb-4 text-center"> Product</h1>
+
+<div class="row">
+    
+  
+<div class="row">
+{% for product in products %}
+<div class="col-md-4">
+    <div class="card">
+        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text">{{ product.description }}</p>
+            <p class="text-muted">Category: {{ product.category.name }}</p> 
+            <p class="text-danger">Price: ${{ product.price }}</p> 
+            <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary">Add to Cart</a> 
+        </div>
+    </div>
+    </div>
+   
+{%endfor%}
+<h1>Latest Product</h1>
+{% for product in latest_products %}
+<div class="col-md-4">
+    <div class="card">
+        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text">{{ product.description }}</p>
+            <p class="text-muted">Category: {{ product.category.name }}</p> 
+            <p class="text-danger">Price: ${{ product.price }}</p> 
+            <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary">Add to Cart</a> 
+        </div>
+    </div>
+    </div>
+    <style>
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            background-color: #f9f9f9;
+        }
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-title {
+            font-size: 1.2em;
+            font-weight: bold;  
+        }
+        .card-text {
+            font-size: 1em;
+            color: #555;
+        }
+        .text-muted {
+            font-size: 0.9em;
+            color: #999;    
+        }
+        .text-danger {
+            font-size: 1.1em;
+            color: #e74c3c;
+        }
+        .btn-primary {
+            background-color: #3498db;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+    </style>
+   
+{%endfor%}
+
+
+</div>  
+
+</div>
+{%endblock%}
+
+
+
+
+

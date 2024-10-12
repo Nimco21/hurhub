@@ -1,0 +1,13 @@
+{% extends 'Base.html' %}
+{% block content %}
+<h1>Pormotion Detail</h1>
+<div class="row">
+    <div class="col-md-4">
+        <img src="{{pormotion.image.url}}" class="img-fluid" alt="{{pormotion.name}}">
+    </div>
+    <div class="col-md-8">
+        <h2>{{pormotion.name}}</h2>
+        <p>{{pormotion.description}}</p>
+    </div>
+    </div>
+{% endblock %}
